@@ -1,23 +1,15 @@
-# Codespell configuration is within .codespellrc
----
-name: Codespell
-
+name: Input demo
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-
-permissions:
-  contents: read
+  workflow_dispatch:
+    inputs:
+      environmet:
+        description: choose the environment to deploy
+        required: true
+        default: dev
 
 jobs:
-  codespell:
-    name: Check for spelling errors
-    runs-on: ubuntu-latest
-
+  input-demo:
+    runs_on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Codespell
-        uses: codespell-project/actions-codespell@v2
+      - name: Deploy the app
+        run: echo "Deploying the application to ${{ inputs.environment }}"
